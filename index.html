@@ -147,25 +147,25 @@
           </div>
 
           <div class="col-lg-5" data-aos="zoom-out" data-aos-delay="200">
-            <form action="forms/quote.php" method="post" class="php-email-form">
+            <form action="forms/quote.php" method="post" class="php-email-form" id="contact-form">
               <h3>CONTACT US</h3>
 <!--               <p>Vel nobis odio laboriosam et hic voluptatem. Inventore vitae totam. Rerum repellendus enim linead sero park flows.</p>
               <div class="row gy-3"> -->
 
                 <div class="col-12">
-                  <input type="text" name="name" class="form-control" placeholder="Name" required="">
+                  <input type="text" name="name" id="name" class="form-control" placeholder="Name" required="">
                 </div>
 
                 <div class="col-12 ">
-                  <input type="email" class="form-control" name="email" placeholder="Email" required="">
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="">
                 </div>
 
                 <div class="col-12">
-                  <input type="text" class="form-control" name="phone" placeholder="Phone" required="">
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" required="">
                 </div>
 
                 <div class="col-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                  <textarea class="form-control"  id="message" name="message" rows="6" placeholder="Message" required=""></textarea>
                 </div>
 
                 <div class="col-12 text-center">
@@ -1020,6 +1020,31 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+<!--   contact-form  -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init({
+              publicKey: "MfTTdpHW_QjV6l7EI",
+            });
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // these IDs from the previous steps
+                emailjs.sendForm('contact_service', 'contact_form', this)
+                    .then(() => {
+                        console.log('SUCCESS!');
+                    }, (error) => {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
 
 </body>
 
